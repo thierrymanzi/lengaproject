@@ -15,6 +15,7 @@ import os
 import sentry_sdk
 from decouple import config
 from sentry_sdk.integrations.django import DjangoIntegration
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
@@ -81,6 +82,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -188,6 +190,7 @@ REST_FRAMEWORK = {
 
 from lenga.settings.local import *  # noqa
 from lenga.settings.sentry import *  # noqa
+django_heroku.settings(locals())
 
 # check & expand on HTTP headers & request
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 1024000
